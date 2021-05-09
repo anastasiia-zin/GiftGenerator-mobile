@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 //pages imports
 import 'package:gift_generator/pages/loginPage.dart';
+import 'package:gift_generator/themeModel.dart';
 
-void main() {
-  runApp(MyApp());
-}
+
+void main() => runApp(
+    ChangeNotifierProvider<ThemeModel>(
+        builder: (BuildContext context) => ThemeModel(), child: MyApp()));
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -13,10 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
+      theme: Provider.of<ThemeModel>(context).currentTheme,
       home: LoginPage(),
     );
   }
